@@ -1,0 +1,1567 @@
+:root {
+    --primary-red: #ff6347; /* Tomato Red for accents */
+    --secondary-red: #cc4c35; /* Darker shade for hover states */
+    --dark-background: #1a1a1a; /* Very dark background */
+    --medium-dark-background: #282828; /* Slightly lighter dark for cards/elements */
+    --light-text: #e0e0e0; /* Light text color for readability */
+    --medium-text: #a0a0a0; /* Medium grey for secondary text */
+    --white: #ffffff; /* For very specific elements if needed, but light-text is preferred */
+    --border-color: #444444; /* Darker border color */
+    --box-shadow: rgba(0, 0, 0, 0.3); /* Darker, more pronounced shadows */
+    --hover-shadow: rgba(0, 0, 0, 0.5); /* Even darker on hover */
+    --nav-bg: rgba(26, 26, 26, 0.95); /* Semi-transparent dark for navbar */
+    --section-separator: #3a3a3a; /* For section lines/dividers */
+}
+
+/* Add this to your style.css file */
+
+/* Ensure smooth scrolling is enabled globally */
+
+
+/* For the hero section specifically, which often starts at the very top,
+   you might want to set its scroll-margin-top to the navbar's height as well,
+   so if someone links directly to #hero, it aligns correctly.
+   However, often #hero is visually designed to start just below the nav,
+   so 0px or a smaller margin might be appropriate there if not actively linked within the page.
+   Given your current #hero structure, setting it to 80px is generally safe. */
+
+/* IMPORTANT: Ensure HTML and Body take full viewport height */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensures they take up the full viewport height */
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+    box-sizing: border-box; /* Global box-sizing for consistent sizing */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--light-text); /* Main text color */
+    background-color: var(--dark-background); /* Overall page background */
+    font-size: 16px; /* Base font size for rem units */
+}
+
+/* Base styles for sections */
+section {
+    padding: 80px 0; /* Use px for consistent padding */
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 40px; /* Use px for font size */
+    margin-bottom: 60px; /* Use px for margin */
+    color: var(--light-text); /* Section title color */
+    position: relative;
+    padding-bottom: 10px; /* Use px */
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px; /* Use px */
+    height: 4px; /* Use px */
+    background-color: var(--primary-red); /* Accent color for underline */
+    border-radius: 2px; /* Use px */
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--nav-bg); /* Semi-transparent dark */
+    padding: 15px 0; /* Use px */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Important: Higher than modal if modal z-index is 999 */
+    box-shadow: 0 2px 10px var(--box-shadow); /* Use px */
+    transition: background-color 0.3s ease;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Use px */
+    margin: 0 auto;
+    padding: 0 20px; /* Use px */
+}
+
+.site-logo {
+    color: var(--primary-red); /* Accent color for logo */
+    font-size: 28px; /* Use px */
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-logo:hover {
+    color: var(--light-text); /* Hover to light text */
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 30px; /* Use px */
+}
+
+.nav-links a {
+    color: var(--light-text); /* Nav link text color */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 18px; /* Use px */
+    padding: 5px 0; /* Use px */
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px; /* Use px */
+    background-color: var(--primary-red); /* Accent for underline */
+    left: 0;
+    bottom: -5px; /* Use px */
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active-nav-link::after {
+    width: 100%;
+}
+
+.nav-links a:hover,
+.nav-links a.active-nav-link {
+    color: var(--primary-red); /* Accent for active/hover link */
+}
+
+/* Hamburger menu for mobile */
+.hamburger-menu {
+    display: none; /* Hidden by default on desktop */
+    font-size: 28px; /* Use px */
+    background: none;
+    border: none;
+    color: var(--light-text); /* Hamburger icon color */
+    cursor: pointer;
+    z-index: 1001;
+    transition: color 0.3s ease;
+}
+
+.hamburger-menu:hover {
+    color: var(--primary-red); /* Accent hover */
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--dark-background); /* Consistent with body */
+    padding: 120px 0 80px; /* Adjust top padding to account for fixed navbar */
+    min-height: 100vh; /* Make sure it takes at least full viewport height */
+    display: flex;
+    align-items: center; /* Vertically center content */
+    justify-content: center; /* Horizontally center content */
+    text-align: center; /* Center text by default */
+    background-image:
+        linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)), /* Overlay for readability */
+        url('assets/images/subtle-coding-pattern.png'); /* Your pattern image */
+    background-size: cover; /* Or 'contain', 'repeat' depending on pattern */
+    background-position: center;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column; /* Default to column for small screens */
+    align-items: center;
+    gap: 40px; /* Use px */
+    max-width: 1200px; /* Use px */
+    margin: 0 auto;
+    padding: 0 20px; /* Use px */
+    width: 100%; /* Take full width within max-width */
+}
+
+.hero-left {
+    text-align: center; /* Center text within hero-left */
+}
+
+.hero-photo {
+    width: 400px; /* Use px */
+    height: 400px; /* Use px */
+    border-radius: 10px; /* Use px */
+    object-fit: cover;
+    box-shadow: 0 8px 20px var(--box-shadow); /* Use px */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero-name {
+    font-size: 56px; /* Use px */
+    color: var(--light-text); /* Hero name color */
+    margin-bottom: 10px; /* Use px */
+    opacity: 1; /* Default to visible */
+}
+
+.hero-summary {
+    font-size: 21px; /* Use px */
+    color: var(--medium-text); /* Hero summary color */
+    margin-bottom: 30px; /* Use px */
+    max-width: 600px; /* Use px */
+    line-height: 1.5;
+    opacity: 1; /* Default to visible */
+}
+
+/* Typewriter effect styles */
+.hero-summary.typewriter {
+    display: inline-block; /* Essential for text to wrap correctly with border-right */
+}
+
+#dynamic-title {
+    color: var(--primary-red);
+    font-weight: 400;
+    border-right: 2px solid var(--primary-red); /* Use px */
+    white-space: nowrap;
+    overflow: hidden;
+    animation: blink-caret 0.75s step-end infinite;
+    display: inline-block; /* Essential for min-width to work on a span */
+    min-width: 50px; /* Use px, Adjust this value based on your longest title's width */
+    vertical-align: middle; /* Helps align it better with "Hii, I'm" */
+}
+
+/* Blinking cursor animation */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-red); }
+}
+
+.social-icons {
+    margin-top: 20px; /* Use px */
+}
+
+.social-icons a {
+    color: var(--primary-red); /* Social icon color */
+    font-size: 28px; /* Use px */
+    margin: 0 15px; /* Use px */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-buttons {
+    margin-top: 30px; /* Use px */
+    margin-bottom: 30px; /* Use px */
+    display: flex;
+    gap: 15px; /* Use px */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    justify-content: center;
+}
+
+/* General Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 25px; /* Use px */
+    border-radius: 5px; /* Use px */
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 16px; /* Use px */
+    text-align: center; /* Ensure text is centered within button */
+    white-space: nowrap; /* Prevent text wrapping inside button */
+    min-height: 45px; /* Ensure good touch target size for buttons */
+    box-sizing: border-box; /* Include padding in button's total width/height */
+}
+
+.btn-primary {
+    background-color: var(--primary-red); /* Accent button background */
+    color: var(--white); /* White text on button */
+    box-shadow: 0 4px 10px rgba(255, 99, 71, 0.3); /* Use px */
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-red); /* Darker red on hover */
+    transform: translateY(-2px); /* Use px */
+    box-shadow: 0 6px 15px rgba(255, 99, 71, 0.4); /* Use px */
+}
+
+.btn-small {
+    padding: 8px 18px; /* Use px */
+    font-size: 14px; /* Use px */
+    min-height: 40px; /* Smaller touch target for small buttons, but still good */
+}
+
+/* Refined Open to Work Styling */
+.open-to-work-refined {
+    margin-top: 20px; /* Space below hero-summary */
+    margin-bottom: 25px; /* Space above hero-buttons */
+    display: flex;
+    flex-direction: column; /* Stack label and roles by default */
+    align-items: center; /* Center horizontally for mobile */
+    font-size: 18px; /* Overall font size for the section */
+    color: var(--light-text); /* Default text color */
+    max-width: 650px; /* Use px */
+    text-align: center; /* Center text within this block */
+    width: 100%;
+}
+
+.otw-label {
+    display: flex; /* For icon and text alignment */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    font-weight: 500;
+    margin-bottom: 12px; /* Space between the label and the role pills */
+    flex-wrap: wrap; /* Allow the label to wrap if very long on small screens */
+    justify-content: center; /* Center on mobile */
+}
+
+.otw-icon {
+    color: var(--primary-red); /* Your accent color for the icon */
+    font-size: 19px; /* Use px */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.otw-roles-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow pills to wrap to the next line */
+    justify-content: center; /* Center pills horizontally */
+    gap: 10px; /* Use px */
+}
+
+.otw-role-pill {
+    display: inline-block; /* Essential for padding and background */
+    background-color: rgba(255, 99, 71, 0.1); /* Very subtle translucent background (your primary red with 10% opacity) */
+    color: var(--primary-red); /* Text color in accent red */
+    padding: 6px 14px; /* Use px */
+    border-radius: 20px; /* Use px */
+    font-weight: 600; /* Bolder text for roles */
+    letter-spacing: 0.3px; /* Slightly tighter letter spacing for elegance */
+    white-space: nowrap; /* Prevent text from breaking inside the pill */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 99, 71, 0.2); /* A very light, subtle border */
+}
+
+.otw-role-pill:hover {
+    background-color: rgba(255, 99, 71, 0.25); /* Darker on hover */
+    transform: translateY(-2px); /* Use px */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); /* Use px */
+}
+
+/* About Section */
+.about-section {
+    background-color: var(--medium-dark-background); /* Slightly lighter dark background */
+    padding: 80px 0; /* Use px */
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column; /* Default to column */
+    align-items: center;
+    gap: 40px; /* Use px */
+    max-width: 1000px; /* Use px */
+    margin: 0 auto;
+    padding: 0 20px; /* Use px */
+}
+
+.about-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-photo {
+    width: 300px; /* Use px */
+    height: 300px; /* Use px */
+    border-radius: 10px; /* Use px */
+    object-fit: cover;
+    box-shadow: 0 8px 20px var(--box-shadow); /* Use px */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-photo:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 25px var(--hover-shadow); /* Use px */
+}
+
+.about-right {
+    flex: 2;
+    text-align: center; /* Default center alignment */
+}
+
+.about-right h2 {
+    text-align: center; /* Ensure title is centered */
+    color: var(--light-text);
+}
+
+.about-right p {
+    margin-bottom: 20px; /* Use px */
+    color: var(--medium-text); /* About text color */
+    line-height: 1.7;
+}
+
+/* Education and Work History (Timeline) */
+.education-timeline,
+.work-timeline {
+    max-width: 800px; /* Use px */
+    margin: 0 auto;
+    padding: 0 20px; /* Use px */
+    position: relative;
+}
+
+.education-timeline::before,
+.work-timeline::before {
+    content: '';
+    position: absolute;
+    width: 4px; /* Use px */
+    background-color: var(--border-color); /* Darker line color */
+    top: 0;
+    bottom: 0;
+    left: 50%; /* Default to center for mobile */
+    transform: translateX(-50%); /* Default to center for mobile */
+    border-radius: 2px; /* Use px */
+}
+
+.timeline-item {
+    display: flex;
+    margin-bottom: 50px; /* Use px */
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover */
+    padding: 15px; /* Use px */
+    background-color: var(--medium-dark-background); /* Darker background for card */
+    border-radius: 8px; /* Use px */
+    box-shadow: 0 4px 15px var(--box-shadow); /* Use px */
+    border: 1px solid var(--border-color); /* Subtle border */
+    align-items: flex-start; /* Align dot and content at the top */
+}
+
+.timeline-item:hover {
+    transform: translateY(-5px); /* Use px */
+    box-shadow: 0 8px 25px var(--hover-shadow); /* Use px */
+}
+
+/* On mobile, dot is on left, content wraps */
+.timeline-dot {
+    width: 20px; /* Use px */
+    height: 20px; /* Use px */
+    background-color: var(--primary-red); /* Accent color for dot */
+    border-radius: 50%;
+    position: absolute;
+    top: 15px; /* Use px */
+    left: 50%; /* Default for mobile/center */
+    transform: translateX(-50%); /* Default for mobile/center */
+    z-index: 1;
+    border: 3px solid var(--dark-background); /* Use px */
+}
+
+.timeline-content {
+    flex: 1;
+    padding: 0 30px; /* Use px */
+    text-align: left; /* Ensure all content is left-aligned by default */
+}
+
+.timeline-content h3 {
+    font-size: 24px; /* Use px */
+    color: var(--light-text); /* Heading color */
+    margin-bottom: 5px; /* Use px */
+}
+
+.timeline-content .company,
+.timeline-content .institution {
+    font-weight: 600;
+    color: var(--primary-red); /* Highlight company/institution names with accent color */
+    margin-bottom: 5px; /* Use px */
+}
+
+.timeline-content .duration {
+    color: var(--medium-text); /* Duration text color */
+    font-size: 14px; /* Use px */
+    margin-bottom: 10px; /* Use px */
+}
+
+.timeline-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--light-text); /* List item text color */
+}
+
+.timeline-content ul li {
+    margin-bottom: 5px; /* Use px */
+    position: relative;
+    padding-left: 20px; /* Use px */
+}
+
+.timeline-content ul li::before {
+    content: '\2022'; /* Bullet point */
+    color: var(--primary-red); /* Accent color for bullets */
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 19px; /* Use px */
+    top: -2px; /* Use px */
+}
+
+.timeline-content .view-certificate-link {
+    display: inline-block;
+    margin-top: 10px; /* Use px */
+    color: var(--primary-red); /* Accent color for links */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.timeline-content .view-certificate-link:hover {
+    color: var(--secondary-red); /* Darker accent on hover */
+}
+
+/* Projects Section */
+.projects-section {
+    background-color: var(--dark-background); /* Consistent background */
+    padding: 80px 0; /* Use px */
+}
+
+.project-filters {
+    text-align: center;
+    margin-bottom: 40px; /* Use px */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px; /* Use px */
+    padding: 0 16px; /* Add horizontal padding */
+}
+
+.filter-btn {
+    background-color: var(--medium-dark-background); /* Darker button background */
+    color: var(--light-text); /* Light text on buttons */
+    border: 1px solid var(--border-color); /* Darker border */
+    padding: 10px 25px; /* Use px */
+    margin: 5px 10px; /* Use px */
+    border-radius: 25px; /* Use px */
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    min-width: 128px; /* Ensure minimum tappable area on mobile */
+    min-height: 40px; /* Ensure good touch target height */
+    box-sizing: border-box; /* Include padding in button's total width/height */
+}
+
+.filter-btn:hover {
+    background-color: var(--primary-red); /* Accent hover */
+    color: var(--white); /* White text on hover */
+    border-color: var(--primary-red); /* Accent border */
+    transform: translateY(-2px); /* Use px */
+}
+
+.filter-btn.active {
+    background-color: var(--primary-red); /* Active accent */
+    color: var(--white);
+    border-color: var(--primary-red);
+    box-shadow: 0 4px 10px rgba(255, 99, 71, 0.3); /* Use px */
+}
+
+/* --- CAROUSEL STYLES --- */
+.carousel-container {
+    position: relative;
+    max-width: 1000px; /* Use px */
+    margin: 0 auto;
+    overflow: hidden; /* Hide overflowing cards */
+}
+
+.projects-carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Smooth slide transition */
+    gap: 30px; /* Use px */
+    padding-bottom: 50px; /* Use px */
+    padding-left: 20px; /* Add padding to make first/last card partially visible */
+    padding-right: 20px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.project-card {
+    background-color: var(--medium-dark-background); /* Card background */
+    border-radius: 10px; /* Use px */
+    box-shadow: 0 5px 20px var(--box-shadow); /* Use px */
+    overflow: hidden;
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    width: calc((100% - 60px) / 3); /* 3 cards per view, minus 2 gaps (30px*2=60px) */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    border: 1px solid var(--border-color); /* Subtle border */
+    text-align: center; /* Center title and button */
+}
+
+.project-card:hover {
+    transform: translateY(-5px); /* Use px */
+    box-shadow: 0 10px 30px var(--hover-shadow); /* Use px */
+}
+
+.project-img {
+    width: 100%;
+    height: 180px; /* Use px */
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.project-card h3 {
+    font-size: 22px; /* Use px */
+    color: var(--light-text); /* Project title color */
+    margin: 15px; /* Use px */
+    flex-grow: 1; /* Allow title to take up available space if needed */
+    display: flex; /* Use flexbox to vertically center title */
+    align-items: center;
+    justify-content: center;
+    min-height: 60px; /* Use px */
+}
+
+.project-links {
+    padding: 15px; /* Use px */
+    text-align: center; /* Center the button */
+    border-top: 1px solid var(--border-color);
+    margin-top: auto; /* Push links to bottom of card */
+}
+
+/* HIDE CAROUSEL NAVIGATION ARROWS */
+.carousel-nav-arrow {
+    display: none; /* Hide the arrows completely */
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Use px */
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.dot {
+    height: 10px; /* Use px */
+    width: 10px; /* Use px */
+    margin: 0 5px; /* Use px */
+    background-color: var(--border-color);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dot.active {
+    background-color: var(--primary-red);
+    transform: scale(1.2);
+}
+/* --- END CAROUSEL STYLES --- */
+
+/* Skills Section */
+.skills-section {
+    background-color: var(--medium-dark-background); /* Consistent with about section */
+    padding: 80px 0; /* Use px */
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Use px */
+    gap: 30px; /* Use px */
+    max-width: 1200px; /* Use px */
+    margin: 0 auto;
+    padding: 0 20px; /* Use px */
+}
+
+.skill-card {
+    background-color: var(--medium-dark-background); /* Card background */
+    border-radius: 10px; /* Use px */
+    box-shadow: 0 5px 20px var(--box-shadow); /* Use px */
+    padding: 30px; /* Use px */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color); /* Subtle border */
+}
+
+.skill-card:hover {
+    transform: translateY(-5px); /* Use px */
+    box-shadow: 0 10px 30px var(--hover-shadow); /* Use px */
+}
+
+.skill-card i {
+    font-size: 48px; /* Use px */
+    color: var(--primary-red); /* Accent color for skill icons */
+    margin-bottom: 20px; /* Use px */
+}
+
+.skill-card h3 {
+    font-size: 24px; /* Use px */
+    color: var(--light-text); /* Skill heading color */
+    margin-bottom: 15px; /* Use px */
+}
+
+.skill-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--medium-text); /* Skill list item color */
+    text-align: left;
+    display: inline-block; /* To center the list itself */
+}
+
+.skill-card ul li {
+    margin-bottom: 8px; /* Use px */
+    padding-left: 20px; /* Use px */
+    position: relative;
+}
+
+.skill-card ul li::before {
+    content: '\2022'; /* Bullet point */
+    color: var(--primary-red); /* Accent color for bullets */
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+    font-size: 19px; /* Use px */
+    line-height: 1; /* Adjust vertical alignment */
+}
+
+/* Icons for skill categories (using shades of red for variations) */
+.icon-lang { color: #ff5252; /* Lighter red */ }
+.icon-concept { color: #e53935; /* Standard red */ }
+.icon-cloud { color: #d32f2f; /* Darker red */ }
+.icon-dev { color: #c62828; /* Even darker red */ }
+.icon-web { color: #b71c1c; /* Deep red */ }
+.icon-db { color: #ef5350; /* Slightly desaturated red */ }
+.icon-soft { color: #e00000; /* Brightest red */ }
+
+/* Achievements Section - CRITICAL REFINEMENT FOR CENTERING */
+.achievements-section {
+    background-color: var(--dark-background); /* Consistent background */
+    padding: 80px 0; /* Use px */
+    text-align: center; /* Ensures the section title is centered */
+    justify-content: center;
+   
+}
+
+.achievements-list {
+    max-width: 900px; /* Use px - Limits the maximum width of the list container */
+    margin: 0 auto; /* This is KEY for centering the entire list block */
+    padding: 0 20px; /* Use px - Adds horizontal padding inside the list for smaller screens */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack achievement items vertically */
+    /* REMOVED align-items: center; from here. Individual items will center themselves. */
+}
+
+.achievement-item {
+    display: flex; /* Use flexbox for icon and text alignment */
+    align-items: center; /* Vertically center icon and text */
+    background-color: var(--medium-dark-background); /* Achievement card background */
+    border-left: 5px solid var(--primary-red); /* Accent border on desktop */
+    border-radius: 8px; /* Use px */
+    padding: 20px; /* Use px */
+    margin-bottom: 20px; /* Use px */
+    box-shadow: 0 3px 15px var(--box-shadow); /* Use px */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Important for containing text */
+    box-sizing: border-box; /* Include padding in item's total width/height */
+
+    /* ***** CRITICAL CENTERING CHANGES BELOW ***** */
+    width: 100%; /* Take full width of its parent (.achievements-list) */
+    max-width: 800px; /* Use px - Limit the max width of individual items */
+    margin-left: auto; /* Push item to center */
+    margin-right: auto; /* Push item to center */
+    /* ***** END CRITICAL CENTERING CHANGES ***** */
+
+    text-align: left; /* Ensure text aligns left within the item */
+}
+
+.achievement-item:hover {
+    transform: translateX(5px); /* Use px */
+    box-shadow: 0 5px 20px var(--hover-shadow); /* Use px */
+}
+
+.achievement-item i {
+    font-size: 35px; /* Use px */
+    color: var(--primary-red); /* Accent color for icons */
+    margin-right: 20px; /* Use px - space between icon and text */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    line-height: 1; /* Helps vertical alignment with text */
+    padding-top: 2px; /* Slight adjustment for better visual alignment with text */
+    /* text-align: center; REMOVED this, as it's a flex item now. */
+}
+
+.achievement-item p {
+    margin: 0;
+    font-size: 18px; /* Use px */
+    color: var(--light-text); /* Achievement text color */
+    line-height: 1.5;
+    flex-grow: 1; /* Allow text to take up available space */
+    width: 100%; /* Explicitly set width to ensure it takes available space */
+    word-break: break-word; /* Important for long words not causing overflow */
+    overflow-wrap: break-word; /* Modern alternative/fallback for word-break */
+}
+
+
+/* --- MODIFIED Contact Section Styles --- */
+.contact-section {
+    background-color: var(--medium-dark-background); /* Consistent dark background */
+    padding: 100px 0; /* Use px */
+    text-align: center; /* Center the overall content */
+}
+
+.contact-section .section-title {
+    margin-bottom: 30px; /* Use px */
+    font-size: 45px; /* Use px */
+}
+
+.contact-content {
+    display: flex;
+    justify-content: center; /* Centers the single contact-info block */
+    max-width: 900px; /* Use px */
+    margin: 0 auto;
+    padding: 0 20px; /* Use px */
+}
+
+.contact-info {
+    background-color: var(--dark-background); /* Darker background for the info card */
+    padding: 50px; /* Use px */
+    border-radius: 15px; /* Use px */
+    box-shadow: 0 10px 30px var(--box-shadow); /* Use px */
+    border: 2px solid var(--border-color); /* Use px */
+    display: flex; /* Use flexbox to center elements within the card */
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    width: 100%; /* Take full width of its parent */
+    max-width: 700px; /* Use px */
+   
+}
+
+.contact-info .tagline {
+    font-size: 20px; /* Use px */
+    color: var(--medium-text);
+    margin-bottom: 40px; /* Use px */
+    max-width: 650px; /* Use px */
+    line-height: 1.6;
+    text-align: center; /* Ensure tagline is centered */
+    font-weight: 400; /* Standard weight */
+}
+
+.contact-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Use px */
+    gap: 30px; /* Use px */
+    width: 100%; /* Take full width of parent */
+    margin-bottom: 50px; /* Use px */
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column; /* Stack icon and text */
+    align-items: center; /* Center content in each item */
+    padding: 20px; /* Use px */
+    background-color: var(--medium-dark-background); /* Slightly lighter background for each detail item */
+    border-radius: 10px; /* Use px */
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.detail-item:hover {
+    transform: translateY(-8px); /* Use px */
+    box-shadow: 0 12px 25px var(--hover-shadow); /* Use px */
+    border-color: var(--primary-red); /* Accent border on hover */
+}
+
+.detail-item i {
+    font-size: 45px; /* Use px */
+    color: var(--primary-red);
+    margin-bottom: 15px; /* Use px */
+    transition: color 0.3s ease;
+}
+
+.detail-item:hover i {
+    color: var(--light-text); /* Change icon color on hover */
+}
+
+.detail-item .detail-text {
+    margin: 0;
+    font-size: 18px; /* Use px */
+    color: var(--light-text);
+    word-break: break-all; /* Ensure long emails/numbers wrap */
+    text-align: center;
+}
+
+.detail-item .detail-text a {
+    color: var(--light-text); /* Link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.detail-item .detail-text a:hover {
+    color: var(--primary-red); /* Accent color on link hover */
+    text-decoration: underline;
+}
+
+.social-icons.contact-social-large {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 25px; /* Use px */
+    margin-top: 20px; /* Use px */
+}
+
+.social-icons.contact-social-large a {
+    display: flex; /* Align icon and text */
+    align-items: center;
+    font-size: 18px; /* Use px */
+    color: var(--light-text);
+    text-decoration: none;
+    padding: 10px 22px; /* Use px */
+    border: 1px solid var(--border-color);
+    border-radius: 25px; /* Use px */
+    background-color: var(--medium-dark-background);
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    min-width: 128px; /* Ensure a decent touch target */
+    min-height: 45px; /* Ensure good touch target height */
+    box-sizing: border-box; /* Include padding in button size */
+    justify-content: center; /* Center content within the button */
+}
+
+.social-icons.contact-social-large a i {
+    font-size: 22px; /* Use px */
+    margin-right: 10px; /* Use px */
+    color: var(--primary-red); /* Accent icon color */
+    transition: color 0.3s ease;
+}
+
+.social-icons.contact-social-large a:hover {
+    background-color: var(--primary-red);
+    color: var(--white);
+    transform: translateY(-5px); /* Use px */
+    box-shadow: 0 8px 20px rgba(255, 99, 71, 0.4); /* Use px */
+    border-color: var(--primary-red);
+}
+
+.social-icons.contact-social-large a:hover i {
+    color: var(--white); /* Icon turns white on hover */
+}
+/* --- END MODIFIED Contact Section Styles --- */
+
+/* Footer */
+footer {
+    background-color: var(--dark-background); /* Consistent with body */
+    color: var(--medium-text); /* Footer text color */
+    padding: 30px 0; /* Use px */
+    text-align: center;
+    font-size: 14px; /* Use px */
+    border-top: 1px solid var(--section-separator); /* Subtle separator */
+}
+
+.footer-content {
+    max-width: 1200px; /* Use px */
+    margin: 0 auto;
+    padding: 0 20px; /* Use px */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Use px */
+}
+
+.footer-links a {
+    color: var(--medium-text); /* Footer link color */
+    text-decoration: none;
+    margin: 0 15px; /* Use px */
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary-red); /* Accent hover */
+}
+
+/* --- MODAL STYLES (Consolidated and Corrected) --- */
+/* The main modal container/overlay */
+#projectModal {
+    display: none; /* Hidden by default. JavaScript will change this to 'flex' */
+    position: fixed; /* Stays in place relative to the viewport */
+    z-index: 1001; /* Higher than navbar, ensuring it's on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; /* CRUCIAL for vertical centering within the viewport */
+    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent overlay */
+    display: flex; /* IMPORTANT: When visible, enables flexbox for centering */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    overflow-y: auto; /* Adds vertical scrollbars if modal content overflows */
+    padding: 20px; /* Use px */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+}
+
+/* The actual modal content box */
+#projectModal .modal-content {
+    background-color: var(--medium-dark-background); /* Dark card background */
+    color: var(--light-text);
+    padding: 25px 30px; /* Use px */
+    border-radius: 10px; /* Use px */
+    max-width: 600px; /* Use px */
+    width: 90%; /* Responsive width */
+    box-shadow: 0 6px 25px var(--hover-shadow); /* Use px */
+    position: relative; /* Needed for absolute positioning of the close button */
+    animation: fadeInScale 0.3s ease; /* Apply animation */
+}
+
+/* Close Button */
+#projectModal .close-button {
+    position: absolute;
+    top: 12px; /* Use px */
+    right: 16px; /* Use px */
+    color: var(--light-text);
+    font-size: 26px; /* Use px */
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#modalGithubLink {
+    margin-top: 20px; /* Use px */
+    display: inline-block;
+    color: var(--primary-red); /* default color */
+    font-size: 18px; /* Use px */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+#modalGithubLink i {
+    margin-right: 8px; /* Use px */
+}
+
+#modalGithubLink:hover {
+    color: var(--secondary-red); /* using secondary-red for consistent hover */
+}
+
+#projectModal .close-button:hover {
+    color: var(--primary-red); /* Accent on hover */
+}
+
+/* Modal Title & Text */
+#projectModal h3 {
+    margin-top: 0;
+    font-size: 26px; /* Use px */
+    color: var(--primary-red); /* Accent title */
+    margin-bottom: 10px; /* Use px */
+}
+
+#modalDescription {
+    font-size: 16px; /* Use px */
+    line-height: 1.6;
+    margin-bottom: 15px; /* Use px */
+    color: var(--medium-text);
+}
+
+/* Modal Tech Stack List */
+#projectModal h4 {
+    font-size: 18px; /* Use px */
+    color: var(--light-text);
+    margin-top: 20px; /* Use px */
+    margin-bottom: 10px; /* Use px */
+    text-align: left; /* Align to left within modal */
+}
+
+#modalTechStack {
+    list-style-type: disc;
+    padding-left: 20px; /* Use px */
+    color: var(--light-text); /* Consistent text color */
+    text-align: left; /* Align to left within modal */
+    margin-bottom: 20px; /* Use px */
+}
+
+#modalTechStack li {
+    margin-bottom: 6px; /* Use px */
+    color: var(--light-text); /* Consistent text color */
+}
+
+/* Keyframe for modal entry animation */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Optional: style for view button arrow (if you have one inside project cards) */
+.view-btn {
+    background: none;
+    border: none;
+    color: var(--primary-red); /* Changed to your primary red variable */
+    font-size: 21px; /* Use px */
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.view-btn:hover {
+    color: var(--secondary-red); /* Darker red on hover */
+    transform: scale(1.2);
+}
+
+/* --- END MODAL STYLES --- */
+
+/* --- Responsive Media Queries (All Pixel-Based) --- */
+
+/* Large devices (laptops, desktops) - Up to 1200px */
+@media (min-width: 1200px) {
+    .section-title {
+        font-size: 48px;
+    }
+    .hero-name {
+        font-size: 64px;
+    }
+    .hero-summary {
+        font-size: 22px;
+    }
+    .site-logo {
+        font-size: 32px;
+    }
+    .contact-section .section-title {
+        font-size: 50px;
+    }
+}
+
+
+/* Medium devices (tablets, small desktops) - Between 768px and 1199px */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .nav-links li {
+        margin-left: 20px; /* Reduce margin for nav links */
+    }
+    .site-logo {
+        font-size: 28px;
+    }
+    .hero-name {
+        font-size: 40px;
+    }
+    .hero-summary {
+        font-size: 18px;
+    }
+    .section-title {
+        font-size: 38px;
+    }
+    .contact-section .section-title {
+        font-size: 40px;
+    }
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust min-width for skills grid */
+    }
+    .project-card {
+        width: calc((100% - 30px) / 2); /* 2 cards per view (30px gap) */
+        max-width: 400px; /* Cap width for 2-column on larger tablets */
+        margin: 0 auto; /* Center cards if only one row */
+    }
+    .projects-carousel {
+        gap: 20px; /* Reduce gap for 2-column layout */
+    }
+
+    .hero-content {
+        flex-direction: row; /* Row layout on larger screens */
+        text-align: left; /* Align text left */
+        justify-content: space-between;
+        align-items: center; /* Vertically center items in row */
+    }
+
+    .hero-left, .hero-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start; /* Align text to start */
+    }
+
+    .hero-right {
+        align-items: flex-end; /* Align photo to end */
+    }
+
+    .open-to-work-refined {
+        align-items: flex-start; /* Align content inside the block to the left */
+        text-align: left; /* Ensure text is left-aligned */
+    }
+
+    .otw-label {
+        justify-content: flex-start; /* Align label to the left on desktop */
+    }
+
+    .otw-roles-container {
+        justify-content: flex-start; /* Align pills to the left on desktop */
+    }
+
+    .hero-buttons {
+        justify-content: flex-start; /* Align buttons to the left */
+    }
+
+    .about-content {
+        flex-direction: row; /* Row layout on larger screens */
+        text-align: left;
+    }
+
+    .about-right {
+        text-align: left; /* Align text left in about section */
+    }
+
+    /* TIMELINE STYLES FOR DESKTOP (UNIFIED LEFT ALIGNMENT) */
+    .education-timeline::before,
+    .work-timeline::before {
+        left: calc(50% - 200px); /* Shift line to the left of center for content on right (200px) */
+        transform: translateX(0); /* Reset transform, line is fixed at this left position */
+    }
+
+    .timeline-item {
+        flex-direction: row; /* Ensure content is to the right of the dot */
+        justify-content: flex-start; /* Align items to the start of their flex container */
+        width: calc(50% + 200px); /* Extend width to cover the shifted line (200px) */
+        margin-left: auto; /* Push the entire item container to the right */
+        margin-right: 0; /* Ensure no extra right margin */
+        position: relative;
+    }
+
+    .timeline-dot {
+        left: calc(200px - 10px); /* Position relative to the timeline-item, aligned with the line (200px is line's offset, 10px is half dot width) */
+        transform: translateX(0); /* No horizontal transform needed if positioned correctly */
+    }
+
+    .timeline-content {
+        padding-left: 50px; /* Space from the dot/line (50px) */
+        padding-right: 0; /* Remove any right padding */
+        text-align: left;
+    }
+    /* END TIMELINE STYLES FOR DESKTOP */
+
+    .contact-content {
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens */
+        justify-content: center; /* Ensure the single contact-info block is centered */
+    }
+
+    .projects-carousel {
+        padding-left: 0; /* Remove side padding on wider screens */
+        padding-right: 0;
+    }
+
+    /* Achievements on larger screens */
+    .achievement-item {
+        flex-direction: row; /* Ensure icon and text are side-by-side */
+        align-items: center; /* Align icon and text vertically in center */
+        text-align: left; /* Ensure text aligns left */
+        border-top: none; /* Remove top border if present from mobile */
+        border-left: 5px solid var(--primary-red); /* Re-add left border for desktop */
+        padding: 20px; /* Consistent padding */
+        /* These are already set in the global .achievement-item now for consistent centering */
+        /* width: 100%; */
+        /* max-width: 800px; */
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+    }
+    .achievement-item i {
+        margin-right: 20px; /* Space from text */
+        margin-bottom: 0; /* No bottom margin on icon */
+        padding-top: 0; /* Reset padding for desktop */
+        text-align: left; /* Ensure icon is left-aligned */
+    }
+}
+
+/* Small devices (phones) - Up to 767px */
+@media (max-width: 767px) {
+    body {
+        font-size: 15px; /* Slightly smaller base font for mobile */
+    }
+
+    section {
+        padding: 60px 0; /* Reduced section padding */
+    }
+
+    .navbar {
+        padding: 10px 0; /* Smaller navbar padding */
+    }
+
+    .nav-container {
+        padding: 0 15px; /* Smaller container padding */
+    }
+
+    .nav-links {
+        display: none; /* Hide by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--nav-bg);
+        position: absolute;
+        top: 60px; /* Below the navbar (60px) */
+        left: 0;
+        padding: 20px 0; /* Reduced padding */
+        box-shadow: 0 5px 15px var(--box-shadow);
+        transition: transform 0.3s ease-out;
+        transform: translateY(-100%); /* Start off-screen */
+        border-top: 1px solid var(--border-color); /* Add a border for separation */
+    }
+
+    .nav-links.active {
+        display: flex; /* Show when active */
+        transform: translateY(0); /* Slide in */
+    }
+
+    .nav-links li {
+        margin: 0;
+        text-align: center;
+        padding: 10px 0; /* Reduced padding */
+        border-bottom: 1px solid var(--border-color); /* Separator */
+    }
+
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+
+    .nav-links a {
+        font-size: 19px;
+        padding: 10px 0;
+        width: 100%; /* Make links full width */
+        display: block;
+    }
+
+    .hamburger-menu {
+        display: block; /* Show hamburger icon */
+    }
+
+    .hero-section {
+        padding-top: 100px; /* Adjust padding for smaller screens */
+        min-height: auto; /* Allow height to adjust */
+    }
+
+    .hero-name {
+        font-size: 32px; /* Smaller font size */
+    }
+
+    .hero-summary {
+        font-size: 16px;
+    }
+
+    .hero-photo {
+        width: 200px; /* Smaller photo */
+        height: 200px;
+    }
+
+    .hero-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px; /* Smaller gap */
+        width: 100%;
+        padding: 0 15px; /* Add padding to prevent buttons touching edges */
+        box-sizing: border-box;
+    }
+    .hero-buttons .btn {
+        width: 100%; /* Make buttons full width */
+        max-width: 300px; /* Limit max width for stacking effect */
+        margin: 0 auto; /* Center stacked buttons */
+    }
+
+    .about-content {
+        flex-direction: column; /* Stack on small screens */
+    }
+
+    .about-right {
+        text-align: center; /* Center text for small screens */
+    }
+
+    .education-timeline::before,
+    .work-timeline::before {
+        left: 20px; /* Move timeline line to left on mobile */
+        transform: translateX(0);
+    }
+
+    .timeline-item {
+        flex-direction: column; /* Stack on small screens */
+        align-items: flex-start;
+        padding: 15px 15px 15px 40px; /* Adjust padding for line on mobile (15px top/right/bottom, 40px left) */
+        width: auto; /* Allow auto width */
+        margin-left: 0; /* Reset margin */
+        margin-right: 0; /* Reset margin */
+    }
+
+    .timeline-item:nth-child(odd) {
+        flex-direction: column; /* Keep stacked for odd as well on mobile */
+    }
+
+    .timeline-dot {
+        left: 20px; /* Align dot with the line on mobile */
+        transform: translateX(0); /* Reset transform */
+        top: 15px; /* Match timeline-item padding */
+    }
+
+    .timeline-content {
+        padding-left: 0; /* Reset left padding */
+        padding-right: 0; /* Reset right padding */
+        text-align: left;
+    }
+
+    .project-filters {
+        flex-direction: column; /* Stack filters vertically */
+        gap: 8px; /* Smaller gap */
+    }
+
+    .filter-btn {
+        width: 100%;
+        max-width: 200px; /* Limit width of filter buttons */
+        margin: 5px auto; /* Center them */
+    }
+
+    .carousel-container {
+        padding: 0 10px; /* Less padding for very small screens */
+    }
+    .projects-carousel {
+        gap: 15px; /* Smaller gap between cards */
+        padding-left: 10px; /* Adjust padding for mobile */
+        padding-right: 10px;
+    }
+    .project-card {
+        width: 100%; /* Full width for single card view */
+    }
+
+    /* ACHIEVEMENTS SECTION MOBILE ADJUSTMENTS */
+    .achievements-list {
+        padding: 0 16px; /* Consistent side padding on mobile for the list container */
+    }
+
+    .achievement-item {
+        flex-direction: column; /* Ensure vertical stacking on mobile */
+        align-items: flex-start; /* Align content to the left inside the item */
+        padding: 24px 20px; /* Increased top/bottom padding, consistent horizontal */
+        border-left: none; /* Remove left border */
+        border-top: 4px solid var(--primary-red); /* Add top border for mobile */
+        margin-bottom: 24px; /* More space between items */
+        width: 100%; /* Take full width */
+        max-width: none; /* Remove max-width restriction for full mobile width */
+       margin-left: 50px;
+    }
+
+    .achievement-item:hover {
+        transform: translateY(-5px); /* Adjusted hover effect for mobile (move up instead of right) */
+    }
+
+    .achievement-item i {
+        margin-right: 0; /* No horizontal margin for icon */
+        margin-bottom: 12px; /* Space below icon */
+        font-size: 32px; /* Consistent icon size */
+        padding-top: 0; /* Reset any specific padding */
+        width: 100%; /* Ensure icon takes full width within the item */
+        text-align: center; /* CENTER THE ICON ON MOBILE */
+    }
+
+    .achievement-item p {
+        font-size: 16px; /* Consistent text size */
+        text-align: left; /* Ensure text is left-aligned for readability */
+        width: 100%; /* CRUCIAL: Ensure text takes 100% of available width within the item */
+        word-break: break-word; /* Essential for breaking long words */
+        overflow-wrap: break-word; /* Modern alternative/fallback */
+        white-space: normal; /* Allow text to wrap naturally */
+    }
+}
+
+/* Very small devices (extra small phones) - Up to 480px */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px; /* Even smaller base font for very small screens */
+    }
+    .section-title {
+        font-size: 29px;
+        margin-bottom: 40px;
+    }
+    .section-title::after {
+        width: 40px; /* Smaller underline */
+    }
+    .hero-name {
+        font-size: 29px;
+    }
+    .hero-summary {
+        font-size: 14px;
+    }
+    .hero-photo {
+        width: 160px;
+        height: 160px;
+    }
+    .about-photo {
+        width: 250px;
+        height: 250px;
+    }
+    .skills-grid {
+        grid-template-columns: 1fr; /* Single column for skills */
+    }
+    .skill-card {
+        padding: 20px;
+    }
+    .skill-card i {
+        font-size: 32px;
+    }
+    .skill-card h3 {
+        font-size: 19px;
+    }
+    .achievement-item {
+        padding: 19px 16px; /* Adjusted for very small screens, less horizontal padding */
+        margin-bottom: 19px; /* Slightly less margin for very small screens */
+    }
+    .achievement-item i {
+        font-size: 26px; /* Smaller icon on smallest screens */
+        margin-bottom: 6px; /* Slightly less margin below icon */
+    }
+    .achievement-item p {
+        font-size: 14px; /* Slightly smaller text for very small screens */
+    }
+    .contact-section .section-title {
+        font-size: 32px;
+
+    }
+    .contact-info .tagline {
+        font-size: 16px;
+    }
+
+    .contact-info{
+         margin: 0 auto;
+    padding: 0 20px;
+        height: 89vh;
+    }
+    .contact-details-grid {
+        gap: 15px; /* Reduced gap */
+    }
+    .detail-item {
+        padding: 12px; /* Even smaller padding */
+    }
+    .detail-item i {
+        font-size: 30px; /* Even smaller icons */
+        margin-bottom: 8px; /* Reduced margin */
+    }
+    .detail-item .detail-text {
+        font-size: 15px;
+    }
+    .social-icons.contact-social-large a {
+        padding: 8px 15px; /* Even smaller buttons on very small mobile */
+        font-size: 15px;
+    }
+    .social-icons.contact-social-large a i {
+        font-size: 17px;
+        margin-right: 6px;
+    }
+    #projectModal .modal-content {
+        width: 95%; /* Wider modal on very small screens */
+        padding: 20px; /* Reduced padding */
+    }
+    #projectModal h3 {
+        font-size: 22px;
+    }
+    #modalDescription {
+        font-size: 14px;
+    }
+    #modalTechStack h4 {
+        font-size: 16px;
+    }
+    #modalTechStack li {
+        font-size: 14px;
+    }
+    .footer-links a {
+        margin: 0 13px; /* Closer links */
+    }
+}
